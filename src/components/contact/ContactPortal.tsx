@@ -192,11 +192,12 @@ export default function ContactPortal() {
             >
               {/* Terminal bar */}
               <div className="bg-dark-950 px-4 py-3 flex items-center gap-3 border-b border-white/5">
-                <div className="flex gap-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/70" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/70" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/70" />
-                </div>
+<div className="flex gap-2">
+  <div className="w-3 h-3 rounded-full bg-slate-400/60" />
+  <div className="w-3 h-3 rounded-full bg-slate-400/60" />
+  <div className="w-3 h-3 rounded-full bg-slate-400/60" />
+</div>
+
                 <span className="font-mono text-xs text-slate-500">medin@portal:~</span>
                 <div className="ml-auto flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-slate-400 animate-pulse" />
