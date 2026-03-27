@@ -6,9 +6,9 @@ import emailjs from "@emailjs/browser";
 
 // ─── EmailJS config ───────────────────────────────────────────────
 // Replace these with your real EmailJS IDs
-const EMAILJS_SERVICE_ID  = "service_l8sv3gs";
+const EMAILJS_SERVICE_ID = "service_l8sv3gs";
 const EMAILJS_TEMPLATE_ID = "template_zpvz5lt";
-const EMAILJS_PUBLIC_KEY  = "0-BO2wZ5z6OzbxUGf";
+const EMAILJS_PUBLIC_KEY = "0-BO2wZ5z6OzbxUGf";
 // ─────────────────────────────────────────────────────────────────
 
 const COMMANDS = [
@@ -19,14 +19,14 @@ const COMMANDS = [
 ];
 
 export default function ContactPortal() {
-  const ref    = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-20%" });
 
-  const [input,   setInput]   = useState("");
-  const [name,    setName]    = useState("");
-  const [email,   setEmail]   = useState("");
+  const [input, setInput] = useState("");
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
-  const [sent,    setSent]    = useState(false);
+  const [sent, setSent] = useState(false);
   const [sending, setSending] = useState(false);
   const [log, setLog] = useState<string[]>([
     "MEDIN.DEV COMMUNICATION PORTAL v2.0",
@@ -74,11 +74,11 @@ export default function ContactPortal() {
         EMAILJS_SERVICE_ID,
         EMAILJS_TEMPLATE_ID,
         {
-          from_name:    name,
-          from_email:   email,
-          message:      message,
-          to_name:      "Medin",
-          reply_to:     email,
+          from_name: name,
+          from_email: email,
+          message: message,
+          to_name: "Medin",
+          reply_to: email,
         },
         EMAILJS_PUBLIC_KEY
       );
@@ -192,11 +192,11 @@ export default function ContactPortal() {
             >
               {/* Terminal bar */}
               <div className="bg-dark-950 px-4 py-3 flex items-center gap-3 border-b border-white/5">
-<div className="flex gap-2">
-  <div className="w-3 h-3 rounded-full bg-slate-400/60" />
-  <div className="w-3 h-3 rounded-full bg-slate-400/60" />
-  <div className="w-3 h-3 rounded-full bg-slate-400/60" />
-</div>
+                <div className="flex gap-2">
+                  <div className="w-3 h-3 rounded-full bg-slate-400/60" />
+                  <div className="w-3 h-3 rounded-full bg-slate-400/60" />
+                  <div className="w-3 h-3 rounded-full bg-slate-400/60" />
+                </div>
 
                 <span className="font-mono text-xs text-slate-500">medin@portal:~</span>
                 <div className="ml-auto flex items-center gap-2">
@@ -217,10 +217,10 @@ export default function ContactPortal() {
                       line.startsWith("✓")
                         ? "text-slate-400"
                         : line.startsWith("ERROR")
-                        ? "text-red-400"
-                        : line.startsWith(">")
-                        ? "text-slate-300"
-                        : "text-slate-500"
+                          ? "text-red-400"
+                          : line.startsWith(">")
+                            ? "text-slate-300"
+                            : "text-slate-500"
                     }
                   >
                     {line}
@@ -248,9 +248,9 @@ export default function ContactPortal() {
               <div className="border-t border-white/5 p-4 grid grid-cols-2 gap-3">
                 {[
                   { label: "LinkedIn", icon: "🔗", href: "https://linkedin.com/in/medin-turkes-94182936" },
-                  { label: "GitHub",   icon: "💻", href: "https://github.com/metur100" },
-                  { label: "Email",    icon: "📡", href: "mailto:medinturkes@gmail.com" },
-                  { label: "Resume",   icon: "📄", href: "/CV.pdf" },
+                  { label: "GitHub", icon: "💻", href: "https://github.com/metur100" },
+                  { label: "Email", icon: "📡", href: "mailto:medinturkes@gmail.com" },
+                  { label: "Resume", icon: "📄", href: "/CV.pdf" },
                 ].map((link) => (
                   <a
                     key={link.label}
