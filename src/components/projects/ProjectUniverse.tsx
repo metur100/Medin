@@ -2,26 +2,12 @@
 
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useInView } from "framer-motion";
+import Image from "next/image";
 
 const PALETTE = [
-  "#e2e8f0",
-  "#94a3b8",
-  "#64748b",
-  "#cbd5e1",
-  "#f1f5f9",
-  "#b0bec5",
-  "#90a4ae",
-  "#78909c",
-  "#607d8b",
-  "#546e7a",
-  "#8fa8b8",
-  "#a8bcc8",
-  "#c5d5df",
-  "#b8cdd8",
-  "#9fb8c5",
-  "#d4e0e8",
-  "#c0d0da",
-  "#aabec8",
+  "#e2e8f0", "#94a3b8", "#64748b", "#cbd5e1", "#f1f5f9", "#b0bec5",
+  "#90a4ae", "#78909c", "#607d8b", "#546e7a", "#8fa8b8", "#a8bcc8",
+  "#c5d5df", "#b8cdd8", "#9fb8c5", "#d4e0e8", "#c0d0da", "#aabec8",
 ];
 
 const PROJECTS = [
@@ -35,20 +21,17 @@ const PROJECTS = [
     orbitRadius: 150,
     orbitSpeed: 20,
     orbitOffset: 0,
-    category: "Web App & Android App",
+    category: "Web App · Android App · Landing Page",
     description:
-      "Next-generation freight and vehicle management platform for the logistics industry. Real-time tracking, secure vehicle assignment, and seamless shipment coordination.",
+      "Next-generation freight and vehicle management platform for the logistics industry. Real-time tracking, secure vehicle assignment, and seamless shipment coordination — available on web, Android, and showcased via a dedicated landing page.",
     stack: [
-      "React (Vite)",
-      "TypeScript",
-      "ASP.NET Core 8",
-      "Azure SQL",
-      "Azure Web App",
-      "Vercel",
-      "OAuth 2.0 / JWT",
+      "React (Vite)", "TypeScript", "ASP.NET Core 8", "Azure SQL",
+      "Azure Web App", "Vercel", "OAuth 2.0 / JWT",
+      "HTML5", "Bootstrap 4", "jQuery", "EmailJS",
     ],
     impact:
-      "End-to-end logistics management with multilingual support and real-time dashboards.",
+      "End-to-end logistics management with multilingual support, real-time dashboards, and a conversion-optimised landing page.",
+    image: "/emma.jpg",
   },
   {
     id: "teretnjaci",
@@ -63,17 +46,9 @@ const PROJECTS = [
     category: "Web App / Android / iOS",
     description:
       "Specialized information platform for the trucking industry — news, maintenance guides, road assistance, and industry updates. Available on web, Android, and iOS.",
-    stack: [
-      "React",
-      "Vite.js",
-      "TypeScript",
-      "Node.js",
-      "Express.js",
-      "MySQL",
-      "React Native",
-    ],
-    impact:
-      "Cross-platform reach with PWA, Google Play, and App Store presence.",
+    stack: ["React", "Vite.js", "TypeScript", "Node.js", "Express.js", "MySQL", "React Native"],
+    impact: "Cross-platform reach with PWA, Google Play, and App Store presence.",
+    image: "/teretnjaci.png",
   },
   {
     id: "api-management",
@@ -88,17 +63,9 @@ const PROJECTS = [
     category: "Infrastructure APIM",
     description:
       "Production-grade Azure API Management platform with fully automated infrastructure. Terraform IaC, CI/CD pipelines, policy governance, VNET networking, and end-to-end observability.",
-    stack: [
-      "Terraform",
-      "Azure DevOps",
-      "Azure APIM",
-      "Key Vault",
-      "Log Analytics",
-      "KQL",
-      "WAF",
-    ],
-    impact:
-      "Faster delivery, better security, and reduced MTTR through proactive monitoring.",
+    stack: ["Terraform", "Azure DevOps", "Azure APIM", "Key Vault", "Log Analytics", "KQL", "WAF"],
+    impact: "Faster delivery, better security, and reduced MTTR through proactive monitoring.",
+    image: "/apim.png",
   },
   {
     id: "real-orders",
@@ -113,16 +80,9 @@ const PROJECTS = [
     category: "Web App",
     description:
       "Internal ordering platform for RealCore Group — streamlines procurement of equipment and technology. Integrated with Microsoft 365, Azure Logic Apps, and Adaptive Cards.",
-    stack: [
-      "React",
-      "TypeScript",
-      "C# Azure Functions",
-      "Microsoft Entra ID",
-      "Azure Logic Apps",
-      "MS Graph API",
-    ],
-    impact:
-      "Automated approval workflows and real-time order tracking for enterprise procurement.",
+    stack: ["React", "TypeScript", "C# Azure Functions", "Microsoft Entra ID", "Azure Logic Apps", "MS Graph API"],
+    impact: "Automated approval workflows and real-time order tracking for enterprise procurement.",
+    image: "/realorders.jpg",
   },
   {
     id: "org-handler",
@@ -137,15 +97,9 @@ const PROJECTS = [
     category: "Web API & MS Graph",
     description:
       "Event-driven system managing and distributing organizational data across multiple systems at RealCore Group. Pub-sub model via MassTransit and Azure Service Bus.",
-    stack: [
-      ".NET Core (C#)",
-      "MassTransit",
-      "Azure Service Bus",
-      "MS Graph API",
-      "Docker",
-    ],
-    impact:
-      "Seamless inter-system communication without direct API exposure.",
+    stack: [".NET Core (C#)", "MassTransit", "Azure Service Bus", "MS Graph API", "Docker"],
+    impact: "Seamless inter-system communication without direct API exposure.",
+    image: "/org.jpg",
   },
   {
     id: "awalon",
@@ -161,8 +115,8 @@ const PROJECTS = [
     description:
       "Sophisticated CRM system for managing customer relationships, offers, and business processes. Integrates with SharePoint for seamless data management and workflow automation.",
     stack: ["Next.js", "React", "C# .NET", "SharePoint", "TypeScript"],
-    impact:
-      "Centralized customer, offer, and portfolio management with advanced search.",
+    impact: "Centralized customer, offer, and portfolio management with advanced search.",
+    image: "/awalon.png",
   },
   {
     id: "org-tool",
@@ -177,16 +131,9 @@ const PROJECTS = [
     category: "Web App",
     description:
       "Advanced organizational management system with interactive tree structures. Visualize and manage company hierarchies, reporting lines, and employee relationships.",
-    stack: [
-      "Angular",
-      "TypeScript",
-      "ASP.NET Core",
-      "MS Graph API",
-      "Azure Entra ID",
-      "Azure App Services",
-    ],
-    impact:
-      "Real-time org chart management with role-based access control.",
+    stack: ["Angular", "TypeScript", "ASP.NET Core", "MS Graph API", "Azure Entra ID", "Azure App Services"],
+    impact: "Real-time org chart management with role-based access control.",
+    image: "/orgtool.png",
   },
   {
     id: "gentle-track",
@@ -202,25 +149,8 @@ const PROJECTS = [
     description:
       "Modern web-based project management system for tracking projects, customers, and team collaboration. Real-time dashboards, phase management, and auto-generated tracking numbers.",
     stack: ["React", "Vite", "ASP.NET Core", "MS SQL Server", "TypeScript"],
-    impact:
-      "Full project lifecycle management with dual admin/customer views.",
-  },
-  {
-    id: "gentle-access",
-    name: "Gentle Access",
-    initials: "GA",
-    tagline: "Web Accessibility Tool",
-    color: PALETTE[8],
-    size: 40,
-    orbitRadius: 650,
-    orbitSpeed: 68,
-    orbitOffset: 320,
-    category: "Tool App",
-    description:
-      "Innovative web accessibility widget making websites barrier-free. Vision profiles, font size control, contrast mode, night mode, and blue light filter — embeddable in any site.",
-    stack: ["React", "Vite", "CSS", "Local Storage API"],
-    impact:
-      "WCAG compliance helper with privacy-focused local settings persistence.",
+    impact: "Full project lifecycle management with dual admin/customer views.",
+    image: "/gentletrack.png",
   },
   {
     id: "gentle-group",
@@ -237,23 +167,7 @@ const PROJECTS = [
       "High-performance Next.js landing page for Gentle Group. SSR, static generation, Framer Motion animations, Tailwind CSS, and Vercel deployment with HSTS security.",
     stack: ["Next.js 14", "React", "Tailwind CSS", "Framer Motion", "Vercel"],
     impact: "Optimized Core Web Vitals with global CDN delivery.",
-  },
-  {
-    id: "emma-landing",
-    name: "EMMA Landing",
-    initials: "EL",
-    tagline: "Freight Exchange Landing Page",
-    color: PALETTE[10],
-    size: 36,
-    orbitRadius: 725,
-    orbitSpeed: 80,
-    orbitOffset: 36,
-    category: "Web Design",
-    description:
-      "Responsive landing page for the EMMA SOLUTION freight exchange platform. Highlights features, connects clients with transport services, and drives conversions.",
-    stack: ["HTML5", "CSS3", "Bootstrap 4", "jQuery", "EmailJS", "Vercel"],
-    impact:
-      "Smooth UX with WOW.js animations and integrated contact forms.",
+    image: "/gentlegroup.png",
   },
   {
     id: "nrw-real-estate",
@@ -269,8 +183,8 @@ const PROJECTS = [
     description:
       "Responsive real estate platform for property listings in North Rhine-Westphalia. Advanced filtering by location, price, and size with Next.js performance.",
     stack: ["Next.js", "React", "CSS3", "Vercel"],
-    impact:
-      "Connects buyers with agents across NRW with intuitive property search.",
+    impact: "Connects buyers with agents across NRW with intuitive property search.",
+    image: "/nrw.jpg",
   },
   {
     id: "creative-hair",
@@ -286,8 +200,8 @@ const PROJECTS = [
     description:
       "Elegant responsive website for a modern hair salon. Service showcase, appointment booking integration, and smooth React/Vite animations.",
     stack: ["React", "Vite", "CSS3", "Vercel"],
-    impact:
-      "Premium salon experience online with integrated booking system.",
+    impact: "Premium salon experience online with integrated booking system.",
+    image: "/hairsalon.jpg",
   },
   {
     id: "ipad-management",
@@ -303,8 +217,8 @@ const PROJECTS = [
     description:
       "Windows application for Berufskolleg Hilden to manage iPad distribution to students. Loan/return tracking, damage reporting, signature capture, and MS Access database.",
     stack: ["C#", "Windows Forms", "MS Access"],
-    impact:
-      "Streamlined device management reducing administrative workload for teachers.",
+    impact: "Streamlined device management reducing administrative workload for teachers.",
+    image: "/ipad.jpg",
   },
   {
     id: "frankenstein",
@@ -320,8 +234,8 @@ const PROJECTS = [
     description:
       "Immersive Android app bringing Mary Shelley's Frankenstein to life. Interactive storytelling, historical context, shareable quotes, and offline reading support.",
     stack: ["Android Studio", "Java", "XML", "Adobe Illustrator"],
-    impact:
-      "Published on Google Play with offline reading and social sharing.",
+    impact: "Published on Google Play with offline reading and social sharing.",
+    image: "/frankenstein.jpg",
   },
   {
     id: "monthee",
@@ -337,8 +251,8 @@ const PROJECTS = [
     description:
       "2D platformer with RPG elements for PC and Android. Features quests, NPC interactions, leveling system, puzzle platforming, and cross-platform play.",
     stack: ["Unity", "C#", "Adobe After Effects", "Audacity"],
-    impact:
-      "5-month solo project with full cross-platform PC and Android support.",
+    impact: "5-month solo project with full cross-platform PC and Android support.",
+    image: "/monthee.jpg",
   },
   {
     id: "sweets",
@@ -355,6 +269,7 @@ const PROJECTS = [
       "Website showcasing international sweets and confectionery from around the world.",
     stack: ["HTML5", "CSS3", "JavaScript"],
     impact: "Engaging product showcase with international content.",
+    image: "/sweets.png",
   },
   {
     id: "employee-appraisal",
@@ -370,8 +285,25 @@ const PROJECTS = [
     description:
       "Web application for managing employee performance appraisals and reviews.",
     stack: ["React", "TypeScript", "ASP.NET Core", "SQL"],
-    impact:
-      "Structured performance review process for enterprise teams.",
+    impact: "Structured performance review process for enterprise teams.",
+    image: "/appraisal.jpg",
+  },
+  {
+    id: "gentle-access",
+    name: "Gentle Access",
+    initials: "GA",
+    tagline: "Web Accessibility Tool",
+    color: PALETTE[8],
+    size: 40,
+    orbitRadius: 650,
+    orbitSpeed: 68,
+    orbitOffset: 320,
+    category: "Tool App",
+    description:
+      "Innovative web accessibility widget making websites barrier-free. Vision profiles, font size control, contrast mode, night mode, and blue light filter — embeddable in any site.",
+    stack: ["React", "Vite", "CSS", "Local Storage API"],
+    impact: "WCAG compliance helper with privacy-focused local settings persistence.",
+    image: "/gentlegroup.png",
   },
 ];
 
@@ -417,7 +349,7 @@ function OrbitingPlanet({
       <style>{`
         @keyframes orbit-planet-${project.id} {
           from { transform: rotate(${startDeg}deg); }
-          to { transform: rotate(${startDeg + 360}deg); }
+          to   { transform: rotate(${startDeg + 360}deg); }
         }
       `}</style>
 
@@ -439,7 +371,7 @@ function OrbitingPlanet({
         <style>{`
           @keyframes counter-orbit-${project.id} {
             from { transform: rotate(${-startDeg}deg); }
-            to { transform: rotate(${-(startDeg + 360)}deg); }
+            to   { transform: rotate(${-(startDeg + 360)}deg); }
           }
         `}</style>
 
@@ -478,9 +410,7 @@ function OrbitingPlanet({
           {hovered && (
             <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 pointer-events-none whitespace-nowrap z-50">
               <div className="glass rounded-lg px-3 py-1.5 text-center">
-                <p className="font-mono text-xs font-bold text-white">
-                  {project.name}
-                </p>
+                <p className="font-mono text-xs font-bold text-white">{project.name}</p>
                 <p className="text-slate-400 text-[10px]">{project.tagline}</p>
               </div>
             </div>
@@ -572,9 +502,7 @@ export default function ProjectUniverse() {
                   "0 0 40px rgba(226,232,240,0.15), 0 0 80px rgba(148,163,184,0.08)",
               }}
             >
-              <span className="font-black text-dark-950 text-lg select-none">
-                MT
-              </span>
+              <span className="font-black text-dark-950 text-lg select-none">MT</span>
             </div>
             <div className="absolute -inset-4 rounded-full border border-white/[0.06] animate-pulse-slow" />
           </motion.div>
@@ -616,10 +544,7 @@ export default function ProjectUniverse() {
                     border: `1px solid ${p.color}35`,
                   }}
                 >
-                  <span
-                    className="font-black text-[8px]"
-                    style={{ color: p.color }}
-                  >
+                  <span className="font-black text-[8px]" style={{ color: p.color }}>
                     {p.initials}
                   </span>
                 </div>
@@ -627,9 +552,7 @@ export default function ProjectUniverse() {
                   <p className="font-mono text-[10px] text-slate-300 group-hover:text-white transition-colors truncate">
                     {p.name}
                   </p>
-                  <p className="text-[9px] text-slate-600 truncate">
-                    {p.category}
-                  </p>
+                  <p className="text-[9px] text-slate-600 truncate">{p.category}</p>
                 </div>
               </button>
             ))}
@@ -657,6 +580,7 @@ export default function ProjectUniverse() {
               transition={{ type: "spring", damping: 25 }}
               onClick={(e) => e.stopPropagation()}
             >
+              {/* Close */}
               <button
                 type="button"
                 onClick={() => setSelected(null)}
@@ -665,18 +589,16 @@ export default function ProjectUniverse() {
                 ✕
               </button>
 
+              {/* Header */}
               <div className="flex items-start gap-4 mb-6">
                 <div
-                  className="w-16 h-16 rounded-xl flex-shrink-0 flex flex-col items-center justify-center"
+                  className="w-16 h-16 rounded-xl flex-shrink-0 flex items-center justify-center"
                   style={{
                     background: `${selected.color}10`,
                     border: `1px solid ${selected.color}25`,
                   }}
                 >
-                  <span
-                    className="font-black text-lg"
-                    style={{ color: selected.color }}
-                  >
+                  <span className="font-black text-lg" style={{ color: selected.color }}>
                     {selected.initials}
                   </span>
                 </div>
@@ -684,37 +606,48 @@ export default function ProjectUniverse() {
                   <span className="font-mono text-[10px] tracking-widest uppercase text-slate-500">
                     {selected.category}
                   </span>
-                  <h3 className="text-2xl font-black text-white mt-1">
-                    {selected.name}
-                  </h3>
-                  <p className="text-slate-400 text-sm mt-1">
-                    {selected.tagline}
-                  </p>
+                  <h3 className="text-2xl font-black text-white mt-1">{selected.name}</h3>
+                  <p className="text-slate-400 text-sm mt-1">{selected.tagline}</p>
                 </div>
               </div>
 
+              {/* Image */}
               <div
-                className="w-full h-40 rounded-xl mb-6 flex flex-col items-center justify-center border border-dashed"
-                style={{
-                  borderColor: `${selected.color}20`,
-                  background: `${selected.color}04`,
-                }}
+                className="w-full h-48 rounded-xl mb-6 overflow-hidden border"
+                style={{ borderColor: `${selected.color}20` }}
               >
-                <span
-                  className="font-black text-3xl"
-                  style={{ color: `${selected.color}30` }}
-                >
-                  {selected.initials}
-                </span>
-                <p className="font-mono text-xs text-slate-700 mt-2">
-                  [ project screenshot — drop image here ]
-                </p>
+                {selected.image ? (
+                  <Image
+                    src={selected.image}
+                    alt={selected.name}
+                    width={672}
+                    height={192}
+                    className="w-full h-full object-cover object-top"
+                  />
+                ) : (
+                  <div
+                    className="w-full h-full flex flex-col items-center justify-center"
+                    style={{ background: `${selected.color}04` }}
+                  >
+                    <span
+                      className="font-black text-3xl"
+                      style={{ color: `${selected.color}30` }}
+                    >
+                      {selected.initials}
+                    </span>
+                    <p className="font-mono text-xs text-slate-700 mt-2">
+                      No preview available
+                    </p>
+                  </div>
+                )}
               </div>
 
+              {/* Description */}
               <p className="text-slate-300 text-sm leading-relaxed mb-6">
                 {selected.description}
               </p>
 
+              {/* Stack */}
               <div className="mb-6">
                 <p className="font-mono text-xs text-slate-600 uppercase tracking-widest mb-3">
                   Tech Stack
@@ -736,6 +669,7 @@ export default function ProjectUniverse() {
                 </div>
               </div>
 
+              {/* Impact */}
               <div
                 className="rounded-xl p-4"
                 style={{
