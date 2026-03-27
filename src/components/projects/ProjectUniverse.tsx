@@ -32,6 +32,7 @@ const PROJECTS = [
     impact:
       "End-to-end logistics management with multilingual support, real-time dashboards, and a conversion-optimised landing page.",
     image: "/emma.jpg",
+    link: "https://emmasolution.com/",
   },
   {
     id: "teretnjaci",
@@ -49,63 +50,75 @@ const PROJECTS = [
     stack: ["React", "Vite.js", "TypeScript", "Node.js", "Express.js", "MySQL", "React Native"],
     impact: "Cross-platform reach with PWA, Google Play, and App Store presence.",
     image: "/teretnjaci.png",
+    link: "https://teretnjaci.ba",
+  },
+  {
+    id: "gentle-suite",
+    name: "Gentle Suite",
+    initials: "GS",
+    tagline: "Full CRM & Business Management",
+    color: PALETTE[2],
+    size: 68,
+    orbitRadius: 305,
+    orbitSpeed: 32,
+    orbitOffset: 80,
+    category: "Web App · CRM · ERP",
+    description:
+      "Comprehensive business management suite — create customers and offers, generate invoices, manage employees, onboarding, internal ticket system, project management, expenses, time tracking, and product/service pricelists. A fully-featured evolution of Awalon CRM.",
+    stack: [
+      "Next.js", "React", "TypeScript", "C# ASP.NET Core",
+      "MS SQL", "Vercel", "Monster ASP Hosting",
+    ],
+    impact:
+      "All-in-one business platform replacing multiple tools with a single integrated suite.",
+    image: "/gentlesuite.png",
+    link: "https://gentlesuite.vercel.app/",
   },
   {
     id: "api-management",
     name: "Azure APIM",
     initials: "AM",
     tagline: "Infrastructure & DevOps",
-    color: PALETTE[2],
-    size: 68,
-    orbitRadius: 305,
-    orbitSpeed: 32,
-    orbitOffset: 80,
+    color: PALETTE[3],
+    size: 62,
+    orbitRadius: 375,
+    orbitSpeed: 38,
+    orbitOffset: 120,
     category: "Infrastructure APIM",
     description:
       "Production-grade Azure API Management platform with fully automated infrastructure. Terraform IaC, CI/CD pipelines, policy governance, VNET networking, and end-to-end observability.",
     stack: ["Terraform", "Azure DevOps", "Azure APIM", "Key Vault", "Log Analytics", "KQL", "WAF"],
     impact: "Faster delivery, better security, and reduced MTTR through proactive monitoring.",
     image: "/apim.png",
+    link: null,
+  },
+  {
+    id: "logistic-management",
+    name: "LogiTrack",
+    initials: "LT",
+    tagline: "Logistics Management System",
+    color: PALETTE[4],
+    size: 56,
+    orbitRadius: 440,
+    orbitSpeed: 44,
+    orbitOffset: 160,
+    category: "Web App · Logistics",
+    description:
+      "Full logistics management system for drivers and dispatchers. Real-time fleet oversight, route management, and operational coordination — hosted on Cloudflare Pages with a robust ASP.NET Core backend.",
+    stack: [
+      "React", "Vite", "TypeScript", "C# ASP.NET Core",
+      "MS SQL", "Monster ASP Hosting", "Cloudflare Pages",
+    ],
+    impact:
+      "Streamlined driver and dispatcher workflows with real-time logistics visibility.",
+    image: "/logitrack.png",
+    link: "https://logistic-management-ui.pages.dev/",
   },
   {
     id: "real-orders",
     name: "RealOrders",
     initials: "RO",
     tagline: "Internal Ordering System",
-    color: PALETTE[3],
-    size: 62,
-    orbitRadius: 375,
-    orbitSpeed: 38,
-    orbitOffset: 120,
-    category: "Web App",
-    description:
-      "Internal ordering platform for RealCore Group — streamlines procurement of equipment and technology. Integrated with Microsoft 365, Azure Logic Apps, and Adaptive Cards.",
-    stack: ["React", "TypeScript", "C# Azure Functions", "Microsoft Entra ID", "Azure Logic Apps", "MS Graph API"],
-    impact: "Automated approval workflows and real-time order tracking for enterprise procurement.",
-    image: "/realorders.jpg",
-  },
-  {
-    id: "org-handler",
-    name: "Org Handler",
-    initials: "OH",
-    tagline: "Event-Driven Org Management",
-    color: PALETTE[4],
-    size: 56,
-    orbitRadius: 440,
-    orbitSpeed: 44,
-    orbitOffset: 160,
-    category: "Web API & MS Graph",
-    description:
-      "Event-driven system managing and distributing organizational data across multiple systems at RealCore Group. Pub-sub model via MassTransit and Azure Service Bus.",
-    stack: [".NET Core (C#)", "MassTransit", "Azure Service Bus", "MS Graph API", "Docker"],
-    impact: "Seamless inter-system communication without direct API exposure.",
-    image: "/org.jpg",
-  },
-  {
-    id: "awalon",
-    name: "Awalon CRM",
-    initials: "AW",
-    tagline: "CRM with SharePoint Integration",
     color: PALETTE[5],
     size: 52,
     orbitRadius: 500,
@@ -113,203 +126,312 @@ const PROJECTS = [
     orbitOffset: 200,
     category: "Web App",
     description:
+      "Internal ordering platform for RealCore Group — streamlines procurement of equipment and technology. Integrated with Microsoft 365, Azure Logic Apps, and Adaptive Cards.",
+    stack: ["React", "TypeScript", "C# Azure Functions", "Microsoft Entra ID", "Azure Logic Apps", "MS Graph API"],
+    impact: "Automated approval workflows and real-time order tracking for enterprise procurement.",
+    image: "/realorders.jpg",
+    link: "https://wa-real-shopping-app.azurewebsites.net/",
+  },
+  {
+    id: "skinbloom",
+    name: "Skinbloom",
+    initials: "SB",
+    tagline: "Skincare Booking & Price Calculator",
+    color: PALETTE[6],
+    size: 48,
+    orbitRadius: 555,
+    orbitSpeed: 56,
+    orbitOffset: 240,
+    category: "Web App · Booking System",
+    description:
+      "Booking system for a skincare studio with a dedicated price calculator (Preisrechner). Full appointment management, service pricing engine powered by Neon DB and Node.js backend, and a seamless client-facing booking flow.",
+    stack: [
+      "Next.js", "React", "TypeScript", "C# ASP.NET Core",
+      "MS SQL", "Node.js", "Neon DB (MySQL)",
+      "Monster ASP Hosting", "Vercel",
+    ],
+    impact:
+      "Automated skincare appointment booking with dynamic pricing for clients.",
+    image: "/skinbloom.png",
+    link: "https://skinbloombooking.gentlegroup.de/",
+  },
+  {
+    id: "vip-shuttle",
+    name: "VIP Shuttle 24",
+    initials: "VS",
+    tagline: "Premium Transfer Landing Page",
+    color: PALETTE[7],
+    size: 44,
+    orbitRadius: 605,
+    orbitSpeed: 62,
+    orbitOffset: 280,
+    category: "Landing Page Website",
+    description:
+      "High-performance landing page for a premium shuttle and transfer service. Built with Next.js for fast SSR, clean Tailwind CSS design, and optimised for conversions and local SEO.",
+    stack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "Vercel"],
+    impact:
+      "Professional online presence driving bookings for a premium transfer service.",
+    image: "/vip.png",
+    link: "https://vipshuttle-24.de/",
+  },
+  {
+    id: "org-handler",
+    name: "Org Handler",
+    initials: "OH",
+    tagline: "Event-Driven Org Management",
+    color: PALETTE[8],
+    size: 40,
+    orbitRadius: 650,
+    orbitSpeed: 68,
+    orbitOffset: 320,
+    category: "Web API & MS Graph",
+    description:
+      "Event-driven system managing and distributing organizational data across multiple systems at RealCore Group. Pub-sub model via MassTransit and Azure Service Bus.",
+    stack: [".NET Core (C#)", "MassTransit", "Azure Service Bus", "MS Graph API", "Docker"],
+    impact: "Seamless inter-system communication without direct API exposure.",
+    image: "/org.jpg",
+    link: null,
+  },
+  {
+    id: "zoey",
+    name: "Zoey Preisrechner",
+    initials: "ZP",
+    tagline: "Service Price Calculator",
+    color: PALETTE[9],
+    size: 38,
+    orbitRadius: 690,
+    orbitSpeed: 74,
+    orbitOffset: 0,
+    category: "Web App · Calculator",
+    description:
+      "Interactive service price calculator with all pricing data managed as frontend JSON configurations. Fast, lightweight, and easy to maintain — no backend required.",
+    stack: ["Next.js", "React", "TypeScript", "JSON"],
+    impact:
+      "Instant price transparency for clients with zero backend overhead.",
+    image: "/zoey.png",
+    link: "https://zoey-preisrechner.vercel.app/",
+  },
+  {
+    id: "awalon",
+    name: "Awalon CRM",
+    initials: "AW",
+    tagline: "CRM with SharePoint Integration",
+    color: PALETTE[10],
+    size: 36,
+    orbitRadius: 725,
+    orbitSpeed: 80,
+    orbitOffset: 36,
+    category: "Web App",
+    description:
       "Sophisticated CRM system for managing customer relationships, offers, and business processes. Integrates with SharePoint for seamless data management and workflow automation.",
     stack: ["Next.js", "React", "C# .NET", "SharePoint", "TypeScript"],
     impact: "Centralized customer, offer, and portfolio management with advanced search.",
     image: "/awalon.png",
+    link: null,
   },
   {
     id: "org-tool",
     name: "Org Tool",
     initials: "OT",
     tagline: "Company Hierarchy Visualization",
-    color: PALETTE[6],
-    size: 48,
-    orbitRadius: 555,
-    orbitSpeed: 56,
-    orbitOffset: 240,
+    color: PALETTE[11],
+    size: 34,
+    orbitRadius: 758,
+    orbitSpeed: 86,
+    orbitOffset: 72,
     category: "Web App",
     description:
       "Advanced organizational management system with interactive tree structures. Visualize and manage company hierarchies, reporting lines, and employee relationships.",
     stack: ["Angular", "TypeScript", "ASP.NET Core", "MS Graph API", "Azure Entra ID", "Azure App Services"],
     impact: "Real-time org chart management with role-based access control.",
     image: "/orgtool.png",
+    link: null,
   },
   {
     id: "gentle-track",
     name: "Gentle Track",
     initials: "GT",
     tagline: "Project Management System",
-    color: PALETTE[7],
-    size: 44,
-    orbitRadius: 605,
-    orbitSpeed: 62,
-    orbitOffset: 280,
+    color: PALETTE[12],
+    size: 32,
+    orbitRadius: 788,
+    orbitSpeed: 92,
+    orbitOffset: 108,
     category: "Web App",
     description:
       "Modern web-based project management system for tracking projects, customers, and team collaboration. Real-time dashboards, phase management, and auto-generated tracking numbers.",
     stack: ["React", "Vite", "ASP.NET Core", "MS SQL Server", "TypeScript"],
     impact: "Full project lifecycle management with dual admin/customer views.",
     image: "/gentletrack.png",
+    link: "https://f7e2b27f.gentle-track-ui.pages.dev/",
   },
   {
     id: "gentle-group",
     name: "Gentle Group",
     initials: "GG",
     tagline: "Modern Landing Page",
-    color: PALETTE[9],
-    size: 38,
-    orbitRadius: 690,
-    orbitSpeed: 74,
-    orbitOffset: 0,
+    color: PALETTE[13],
+    size: 30,
+    orbitRadius: 815,
+    orbitSpeed: 98,
+    orbitOffset: 144,
     category: "Landing Page Website",
     description:
       "High-performance Next.js landing page for Gentle Group. SSR, static generation, Framer Motion animations, Tailwind CSS, and Vercel deployment with HSTS security.",
     stack: ["Next.js 14", "React", "Tailwind CSS", "Framer Motion", "Vercel"],
     impact: "Optimized Core Web Vitals with global CDN delivery.",
     image: "/gentlegroup.png",
+    link: "https://www.gentlegroup.de/",
   },
   {
     id: "nrw-real-estate",
     name: "NRW Real Estate",
     initials: "NR",
     tagline: "Property Listings Platform",
-    color: PALETTE[11],
-    size: 34,
-    orbitRadius: 758,
-    orbitSpeed: 86,
-    orbitOffset: 72,
+    color: PALETTE[14],
+    size: 28,
+    orbitRadius: 840,
+    orbitSpeed: 104,
+    orbitOffset: 180,
     category: "Website",
     description:
       "Responsive real estate platform for property listings in North Rhine-Westphalia. Advanced filtering by location, price, and size with Next.js performance.",
     stack: ["Next.js", "React", "CSS3", "Vercel"],
     impact: "Connects buyers with agents across NRW with intuitive property search.",
     image: "/nrw.jpg",
+    link: "https://www.nrwrealestate.de/",
   },
   {
     id: "creative-hair",
     name: "Creative Hair",
     initials: "CH",
     tagline: "Hair Salon Website",
-    color: PALETTE[12],
-    size: 32,
-    orbitRadius: 788,
-    orbitSpeed: 92,
-    orbitOffset: 108,
+    color: PALETTE[15],
+    size: 26,
+    orbitRadius: 862,
+    orbitSpeed: 110,
+    orbitOffset: 216,
     category: "Website",
     description:
       "Elegant responsive website for a modern hair salon. Service showcase, appointment booking integration, and smooth React/Vite animations.",
     stack: ["React", "Vite", "CSS3", "Vercel"],
     impact: "Premium salon experience online with integrated booking system.",
     image: "/hairsalon.jpg",
-  },
-  {
-    id: "ipad-management",
-    name: "iPad Mgmt",
-    initials: "IM",
-    tagline: "Device Management for Schools",
-    color: PALETTE[13],
-    size: 30,
-    orbitRadius: 815,
-    orbitSpeed: 98,
-    orbitOffset: 144,
-    category: "Windows App",
-    description:
-      "Windows application for Berufskolleg Hilden to manage iPad distribution to students. Loan/return tracking, damage reporting, signature capture, and MS Access database.",
-    stack: ["C#", "Windows Forms", "MS Access"],
-    impact: "Streamlined device management reducing administrative workload for teachers.",
-    image: "/ipad.jpg",
-  },
-  {
-    id: "frankenstein",
-    name: "Frankenstein",
-    initials: "FK",
-    tagline: "Interactive Android Novel",
-    color: PALETTE[14],
-    size: 28,
-    orbitRadius: 840,
-    orbitSpeed: 104,
-    orbitOffset: 180,
-    category: "Android App",
-    description:
-      "Immersive Android app bringing Mary Shelley's Frankenstein to life. Interactive storytelling, historical context, shareable quotes, and offline reading support.",
-    stack: ["Android Studio", "Java", "XML", "Adobe Illustrator"],
-    impact: "Published on Google Play with offline reading and social sharing.",
-    image: "/frankenstein.jpg",
-  },
-  {
-    id: "monthee",
-    name: "Monthee Adventure",
-    initials: "MA",
-    tagline: "2D Platformer RPG",
-    color: PALETTE[15],
-    size: 26,
-    orbitRadius: 862,
-    orbitSpeed: 110,
-    orbitOffset: 216,
-    category: "Unity Engine",
-    description:
-      "2D platformer with RPG elements for PC and Android. Features quests, NPC interactions, leveling system, puzzle platforming, and cross-platform play.",
-    stack: ["Unity", "C#", "Adobe After Effects", "Audacity"],
-    impact: "5-month solo project with full cross-platform PC and Android support.",
-    image: "/monthee.jpg",
-  },
-  {
-    id: "sweets",
-    name: "Sweets aus aller Welt",
-    initials: "SW",
-    tagline: "International Sweets Website",
-    color: PALETTE[16],
-    size: 24,
-    orbitRadius: 882,
-    orbitSpeed: 116,
-    orbitOffset: 252,
-    category: "Website",
-    description:
-      "Website showcasing international sweets and confectionery from around the world.",
-    stack: ["HTML5", "CSS3", "JavaScript"],
-    impact: "Engaging product showcase with international content.",
-    image: "/sweets.png",
-  },
-  {
-    id: "employee-appraisal",
-    name: "Employee Appraisal",
-    initials: "EA",
-    tagline: "Performance Review System",
-    color: PALETTE[17],
-    size: 22,
-    orbitRadius: 900,
-    orbitSpeed: 122,
-    orbitOffset: 288,
-    category: "Web App",
-    description:
-      "Web application for managing employee performance appraisals and reviews.",
-    stack: ["React", "TypeScript", "ASP.NET Core", "SQL"],
-    impact: "Structured performance review process for enterprise teams.",
-    image: "/appraisal.jpg",
+    link: "https://creative-hairstyling-3u6e.vercel.app/",
   },
   {
     id: "gentle-access",
     name: "Gentle Access",
     initials: "GA",
     tagline: "Web Accessibility Tool",
-    color: PALETTE[8],
-    size: 40,
-    orbitRadius: 650,
-    orbitSpeed: 68,
-    orbitOffset: 320,
+    color: PALETTE[16],
+    size: 24,
+    orbitRadius: 882,
+    orbitSpeed: 116,
+    orbitOffset: 252,
     category: "Tool App",
     description:
       "Innovative web accessibility widget making websites barrier-free. Vision profiles, font size control, contrast mode, night mode, and blue light filter — embeddable in any site.",
     stack: ["React", "Vite", "CSS", "Local Storage API"],
     impact: "WCAG compliance helper with privacy-focused local settings persistence.",
     image: "/gentlegroup.png",
+    link: null,
+  },
+  {
+    id: "ipad-management",
+    name: "iPad Mgmt",
+    initials: "IM",
+    tagline: "Device Management for Schools",
+    color: PALETTE[17],
+    size: 22,
+    orbitRadius: 900,
+    orbitSpeed: 122,
+    orbitOffset: 288,
+    category: "Windows App",
+    description:
+      "Windows application for Berufskolleg Hilden to manage iPad distribution to students. Loan/return tracking, damage reporting, signature capture, and MS Access database.",
+    stack: ["C#", "Windows Forms", "MS Access"],
+    impact: "Streamlined device management reducing administrative workload for teachers.",
+    image: "/ipad.jpg",
+    link: null,
+  },
+  {
+    id: "frankenstein",
+    name: "Frankenstein",
+    initials: "FK",
+    tagline: "Interactive Android Novel",
+    color: PALETTE[0],
+    size: 20,
+    orbitRadius: 920,
+    orbitSpeed: 128,
+    orbitOffset: 324,
+    category: "Android App",
+    description:
+      "Immersive Android app bringing Mary Shelley's Frankenstein to life. Interactive storytelling, historical context, shareable quotes, and offline reading support.",
+    stack: ["Android Studio", "Java", "XML", "Adobe Illustrator"],
+    impact: "Published on Google Play with offline reading and social sharing.",
+    image: "/frankenstein.jpg",
+    link: "https://play.google.com/store/apps/details?id=com.certidevelopment.frankenstein",
+  },
+  {
+    id: "monthee",
+    name: "Monthee Adventure",
+    initials: "MA",
+    tagline: "2D Platformer RPG",
+    color: PALETTE[1],
+    size: 20,
+    orbitRadius: 938,
+    orbitSpeed: 134,
+    orbitOffset: 360,
+    category: "Unity Engine",
+    description:
+      "2D platformer with RPG elements for PC and Android. Features quests, NPC interactions, leveling system, puzzle platforming, and cross-platform play.",
+    stack: ["Unity", "C#", "Adobe After Effects", "Audacity"],
+    impact: "5-month solo project with full cross-platform PC and Android support.",
+    image: "/monthee.jpg",
+    link: "https://play.google.com/store/apps/details?id=com.CertiDevelopment.MontheeAdventure",
+  },
+  {
+    id: "sweets",
+    name: "Sweets aus aller Welt",
+    initials: "SW",
+    tagline: "International Sweets Website",
+    color: PALETTE[2],
+    size: 20,
+    orbitRadius: 955,
+    orbitSpeed: 140,
+    orbitOffset: 36,
+    category: "Website",
+    description:
+      "Website showcasing international sweets and confectionery from around the world.",
+    stack: ["HTML5", "CSS3", "JavaScript"],
+    impact: "Engaging product showcase with international content.",
+    image: "/sweets.png",
+    link: null,
+  },
+  {
+    id: "employee-appraisal",
+    name: "Employee Appraisal",
+    initials: "EA",
+    tagline: "Performance Review System",
+    color: PALETTE[3],
+    size: 20,
+    orbitRadius: 970,
+    orbitSpeed: 146,
+    orbitOffset: 72,
+    category: "Web App",
+    description:
+      "Web application for managing employee performance appraisals and reviews.",
+    stack: ["React", "TypeScript", "ASP.NET Core", "SQL"],
+    impact: "Structured performance review process for enterprise teams.",
+    image: "/appraisal.jpg",
+    link: null,
   },
 ];
 
 type Project = (typeof PROJECTS)[0];
 
-const ORBIT_COUNT = 6;
+const ORBIT_COUNT = 8;
 
 function OrbitingPlanet({
   project,
@@ -580,36 +702,57 @@ export default function ProjectUniverse() {
               transition={{ type: "spring", damping: 25 }}
               onClick={(e) => e.stopPropagation()}
             >
-              {/* Close */}
-              <button
-                type="button"
-                onClick={() => setSelected(null)}
-                className="absolute top-4 right-4 w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/30 transition-all"
-              >
-                ✕
-              </button>
 
-              {/* Header */}
-              <div className="flex items-start gap-4 mb-6">
-                <div
-                  className="w-16 h-16 rounded-xl flex-shrink-0 flex items-center justify-center"
-                  style={{
-                    background: `${selected.color}10`,
-                    border: `1px solid ${selected.color}25`,
-                  }}
-                >
-                  <span className="font-black text-lg" style={{ color: selected.color }}>
-                    {selected.initials}
-                  </span>
-                </div>
-                <div>
-                  <span className="font-mono text-[10px] tracking-widest uppercase text-slate-500">
-                    {selected.category}
-                  </span>
-                  <h3 className="text-2xl font-black text-white mt-1">{selected.name}</h3>
-                  <p className="text-slate-400 text-sm mt-1">{selected.tagline}</p>
-                </div>
-              </div>
+{/* Header row: icon + info + live + close */}
+<div className="flex items-start gap-4 mb-6 pr-2">
+  {/* Icon */}
+  <div
+    className="w-16 h-16 rounded-xl flex-shrink-0 flex items-center justify-center"
+    style={{
+      background: `${selected.color}10`,
+      border: `1px solid ${selected.color}25`,
+    }}
+  >
+    <span className="font-black text-lg" style={{ color: selected.color }}>
+      {selected.initials}
+    </span>
+  </div>
+
+  {/* Title block */}
+  <div className="flex-1 min-w-0">
+    <span className="font-mono text-[10px] tracking-widest uppercase text-slate-500">
+      {selected.category}
+    </span>
+    <h3 className="text-2xl font-black text-white mt-1">{selected.name}</h3>
+    <p className="text-slate-400 text-sm mt-1">{selected.tagline}</p>
+  </div>
+
+  {/* Right side: Live link + Close stacked vertically, no overlap */}
+  <div className="flex flex-col items-end gap-2 flex-shrink-0">
+    {/* Close button */}
+    <button
+      type="button"
+      onClick={() => setSelected(null)}
+      className="w-8 h-8 rounded-full border border-white/10 flex items-center justify-center text-slate-400 hover:text-white hover:border-white/30 transition-all"
+    >
+      ✕
+    </button>
+
+    {/* Live link — only shown when available */}
+    {selected.link && (
+      <a
+        href={selected.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-white/10 hover:border-white/30 transition-all font-mono text-xs text-slate-400 hover:text-white"
+      >
+        <span>↗</span>
+        <span>Live</span>
+      </a>
+    )}
+  </div>
+</div>
+
 
               {/* Image */}
               <div
@@ -629,15 +772,10 @@ export default function ProjectUniverse() {
                     className="w-full h-full flex flex-col items-center justify-center"
                     style={{ background: `${selected.color}04` }}
                   >
-                    <span
-                      className="font-black text-3xl"
-                      style={{ color: `${selected.color}30` }}
-                    >
+                    <span className="font-black text-3xl" style={{ color: `${selected.color}30` }}>
                       {selected.initials}
                     </span>
-                    <p className="font-mono text-xs text-slate-700 mt-2">
-                      No preview available
-                    </p>
+                    <p className="font-mono text-xs text-slate-700 mt-2">No preview available</p>
                   </div>
                 )}
               </div>
