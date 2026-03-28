@@ -171,7 +171,7 @@ function SkillsDetailPanel({
 export default function SkillsDNA() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-20%" });
-  const [activeGroup, setActiveGroup] = useState<string | null>(null);
+  const [activeGroup, setActiveGroup] = useState<string | null>('fullstack');
   const isMobile = useIsMobile(1024);
 
   const group = SKILL_GROUPS.find((g) => g.id === activeGroup) ?? null;
@@ -272,20 +272,19 @@ export default function SkillsDNA() {
           </div>
         ) : (
           /* DESKTOP */
-          <div className="grid lg:grid-cols-3 gap-8 items-start">
-            <div className="space-y-3">
+          <div className="space-y-6">
+            <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-4">
               {SKILL_GROUPS.map((g, i) => (
                 <motion.button
                   key={g.id}
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
                   transition={{ delay: 0.2 + i * 0.1 }}
                   onClick={() =>
                     setActiveGroup((prev) => (prev === g.id ? null : g.id))
                   }
-                  className={`w-full text-left p-4 rounded-xl transition-all duration-300 border ${
-                    activeGroup === g.id ? "scale-[1.02]" : "hover:scale-[1.01]"
-                  }`}
+                  className={`w-full text-left p-4 rounded-xl transition-all duration-300 border ${activeGroup === g.id ? "scale-[1.02]" : "hover:scale-[1.01]"
+                    }`}
                   style={{
                     background:
                       activeGroup === g.id
@@ -336,32 +335,32 @@ export default function SkillsDNA() {
               ))}
             </div>
 
-            <div className="lg:col-span-2">
-              <AnimatePresence mode="wait">
-                {group ? (
-                  <SkillsDetailPanel key={group.id} group={group} />
-                ) : (
-                  <motion.div
-                    key="placeholder"
-                    initial={{ opacity: 0, y: 12 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -12 }}
-                    className="glass rounded-2xl p-8 border border-white/[0.06]"
-                  >
-                    <p className="font-mono text-xs text-slate-600 uppercase tracking-widest mb-3">
-                      SEQUENCE ANALYSIS
-                    </p>
-                    <h3 className="text-xl font-black text-white mb-2">
-                      Select a skill group
-                    </h3>
-                    <p className="text-slate-400 text-sm leading-relaxed">
-                      Choose one of the skill categories on the left to inspect technologies, strength levels, and capability distribution.
-                    </p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+            <AnimatePresence mode="wait">
+              {group ? (
+                <SkillsDetailPanel key={group.id} group={group} />
+              ) : (
+                <motion.div
+                  key="placeholder"
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -12 }}
+                  className="glass rounded-2xl p-8 border border-white/[0.06]"
+                >
+                  <p className="font-mono text-xs text-slate-600 uppercase tracking-widest mb-3">
+                    SEQUENCE ANALYSIS
+                  </p>
+                  <h3 className="text-xl font-black text-white mb-2">
+                    Select a skill group
+                  </h3>
+                  <p className="text-slate-400 text-sm leading-relaxed">
+                    Choose one of the skill categories above to inspect technologies,
+                    strength levels, and capability distribution.
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
+
         )}
       </div>
     </section>
