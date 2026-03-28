@@ -182,68 +182,6 @@ export default function SkillsDNA() {
       ref={ref}
       className="snap-section relative overflow-hidden bg-dark-800 py-12 md:py-20"
     >
-      {/* Background */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <svg
-          className="absolute inset-0 w-full h-full opacity-[0.04]"
-          viewBox="0 0 100 100"
-          preserveAspectRatio="none"
-        >
-          {Array.from({ length: 18 }).map((_, i) => (
-            <g key={i}>
-              <motion.line
-                x1={`${5 + Math.sin(i * 0.8) * 8}%`}
-                y1={`${i * 5.5}%`}
-                x2={`${95 - Math.sin(i * 0.8) * 8}%`}
-                y2={`${i * 5.5 + 2.5}%`}
-                stroke="#94a3b8"
-                strokeWidth="0.3"
-                initial={{ opacity: 0 }}
-                animate={inView ? { opacity: [0, 0.5, 0] } : {}}
-                transition={{
-                  delay: i * 0.1,
-                  duration: 2,
-                  repeat: Infinity,
-                  repeatDelay: 4,
-                }}
-              />
-            </g>
-          ))}
-        </svg>
-
-        {[
-          "React",
-          ".NET",
-          "Azure",
-          "SQL",
-          "CI/CD",
-          "Docker",
-          "TypeScript",
-          "API",
-          "Git",
-          "Terraform",
-          "Node.js",
-          "C#",
-          "Vite",
-          "APIM",
-        ].map((word, i) => (
-          <motion.div
-            key={i}
-            className="absolute font-mono text-xs text-white/[0.04] select-none"
-            style={{ left: `${(i * 7.3) % 95}%`, top: -20 }}
-            animate={{ y: ["0vh", "110vh"] }}
-            transition={{
-              duration: 12 + (i % 5) * 2,
-              delay: (i % 6) * 1.5,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-          >
-            {word}
-          </motion.div>
-        ))}
-      </div>
-
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div

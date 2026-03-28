@@ -175,9 +175,10 @@ export default function WorkflowSection() {
                   >
                     {/* Number */}
                     <div className="mb-5 md:mb-6 flex items-center justify-between">
-                      <span className="font-mono text-5xl md:text-6xl font-black text-white">
+                      <span className="font-mono text-5xl md:text-6xl font-black text-slate-500">
                         {step.num}
                       </span>
+
 
                       {isMobile && (
                         <motion.span
