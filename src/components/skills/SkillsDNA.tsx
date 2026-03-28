@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useRef, useState, useEffect } from "react";
 import { motion, useInView, AnimatePresence } from "framer-motion";
 
 const SKILL_GROUPS = [
@@ -58,18 +58,137 @@ const SKILL_GROUPS = [
   },
 ];
 
+function useIsMobile(breakpoint = 1024) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < breakpoint);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, [breakpoint]);
+
+  return isMobile;
+}
+
+function SkillsDetailPanel({
+  group,
+}: {
+  group: (typeof SKILL_GROUPS)[number];
+}) {
+  return (
+    <motion.div
+      key={group.id}
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -16 }}
+      transition={{ duration: 0.35 }}
+      className="glass rounded-2xl p-5 sm:p-6 md:p-8"
+      style={{ borderColor: `${group.color}15` }}
+    >
+      <div className="flex items-center gap-3 mb-6 md:mb-8">
+        <div
+          className="w-10 h-10 rounded-xl flex items-center justify-center"
+          style={{
+            background: `${group.color}15`,
+            border: `1px solid ${group.color}30`,
+          }}
+        >
+          <span className="font-black text-sm" style={{ color: group.color }}>
+            {group.icon}
+          </span>
+        </div>
+
+        <div>
+          <h3 className="text-lg sm:text-xl font-black text-white">
+            {group.label}
+          </h3>
+          <p className="font-mono text-[10px] sm:text-xs text-slate-500">
+            SEQUENCE ANALYSIS
+          </p>
+        </div>
+      </div>
+
+      <div className="space-y-5">
+        {group.skills.map((skill, i) => (
+          <motion.div
+            key={skill.name}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.06 }}
+          >
+            <div className="flex items-center justify-between mb-2 gap-3">
+              <span className="font-mono text-xs sm:text-sm text-slate-300">
+                {skill.name}
+              </span>
+              <span className="font-mono text-[10px] sm:text-xs text-slate-500 shrink-0">
+                {skill.level}%
+              </span>
+            </div>
+
+            <div className="relative h-2 rounded-full bg-white/[0.06] overflow-hidden">
+              <motion.div
+                className="absolute inset-y-0 left-0 rounded-full"
+                style={{
+                  background: `linear-gradient(90deg, ${group.color}60, ${group.color})`,
+                }}
+                initial={{ width: 0 }}
+                animate={{ width: `${skill.level}%` }}
+                transition={{
+                  delay: 0.2 + i * 0.08,
+                  duration: 0.7,
+                  ease: "easeOut",
+                }}
+              />
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      <div className="mt-7 flex items-end gap-2 h-20">
+        {group.skills.map((skill, i) => (
+          <motion.div
+            key={skill.name}
+            className="flex-1 rounded-t-sm"
+            style={{
+              background: `${group.color}15`,
+              border: `1px solid ${group.color}25`,
+            }}
+            initial={{ height: 0 }}
+            animate={{ height: `${skill.level}%` }}
+            transition={{
+              delay: 0.25 + i * 0.08,
+              duration: 0.55,
+              ease: "easeOut",
+            }}
+          />
+        ))}
+      </div>
+    </motion.div>
+  );
+}
+
 export default function SkillsDNA() {
   const ref = useRef<HTMLDivElement>(null);
   const inView = useInView(ref, { once: true, margin: "-20%" });
-  const [activeGroup, setActiveGroup] = useState("fullstack");
+  const [activeGroup, setActiveGroup] = useState<string | null>(null);
+  const isMobile = useIsMobile(1024);
 
-  const group = SKILL_GROUPS.find((g) => g.id === activeGroup)!;
+  const group = SKILL_GROUPS.find((g) => g.id === activeGroup) ?? null;
 
   return (
-    <section id="skills" ref={ref} className="snap-section min-h-screen relative overflow-hidden bg-dark-800 py-20">
-      {/* Subtle background lines — no Chinese characters */}
+    <section
+      id="skills"
+      ref={ref}
+      className="snap-section relative overflow-hidden bg-dark-800 py-12 md:py-20"
+    >
+      {/* Background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <svg className="absolute inset-0 w-full h-full opacity-[0.04]" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <svg
+          className="absolute inset-0 w-full h-full opacity-[0.04]"
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+        >
           {Array.from({ length: 18 }).map((_, i) => (
             <g key={i}>
               <motion.line
@@ -81,151 +200,231 @@ export default function SkillsDNA() {
                 strokeWidth="0.3"
                 initial={{ opacity: 0 }}
                 animate={inView ? { opacity: [0, 0.5, 0] } : {}}
-                transition={{ delay: i * 0.1, duration: 2, repeat: Infinity, repeatDelay: 4 }}
+                transition={{
+                  delay: i * 0.1,
+                  duration: 2,
+                  repeat: Infinity,
+                  repeatDelay: 4,
+                }}
               />
             </g>
           ))}
         </svg>
-        {/* Floating code keywords instead of characters */}
-        {["React", ".NET", "Azure", "SQL", "CI/CD", "Docker", "TypeScript", "API", "Git", "Terraform", "Node.js", "C#", "Vite", "APIM"].map((word, i) => (
+
+        {[
+          "React",
+          ".NET",
+          "Azure",
+          "SQL",
+          "CI/CD",
+          "Docker",
+          "TypeScript",
+          "API",
+          "Git",
+          "Terraform",
+          "Node.js",
+          "C#",
+          "Vite",
+          "APIM",
+        ].map((word, i) => (
           <motion.div
             key={i}
             className="absolute font-mono text-xs text-white/[0.04] select-none"
             style={{ left: `${(i * 7.3) % 95}%`, top: -20 }}
             animate={{ y: ["0vh", "110vh"] }}
-            transition={{ duration: 12 + (i % 5) * 2, delay: (i % 6) * 1.5, repeat: Infinity, ease: "linear" }}
+            transition={{
+              duration: 12 + (i % 5) * 2,
+              delay: (i % 6) * 1.5,
+              repeat: Infinity,
+              ease: "linear",
+            }}
           >
             {word}
           </motion.div>
         ))}
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.7 }}
-          className="text-center mb-12"
+          className="text-center mb-10 md:mb-12"
         >
-          <p className="font-mono text-xs tracking-[0.4em] text-slate-600 uppercase mb-4">
+          <p className="font-mono text-[10px] sm:text-xs tracking-[0.32em] sm:tracking-[0.4em] text-slate-600 uppercase mb-4">
             CHAPTER_04 / SKILLS DNA
           </p>
-          <h2 className="text-4xl md:text-6xl font-black">
+          <h2 className="text-3xl md:text-6xl font-black">
             <span className="text-white">Tech </span>
             <span className="gradient-text">DNA</span>
           </h2>
+          <p className="text-slate-600 mt-4 text-sm font-mono">
+            {isMobile ? "tap a group to view details" : "select a skill group"}
+          </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-3 gap-8 items-start">
-          {/* Group selector */}
-          <div className="space-y-3">
-            {SKILL_GROUPS.map((g, i) => (
-              <motion.button
-                key={g.id}
-                initial={{ opacity: 0, x: -30 }}
-                animate={inView ? { opacity: 1, x: 0 } : {}}
-                transition={{ delay: 0.2 + i * 0.1 }}
-                onClick={() => setActiveGroup(g.id)}
-                className={`w-full text-left p-4 rounded-xl transition-all duration-300 border ${
-                  activeGroup === g.id ? "scale-[1.02]" : "hover:scale-[1.01]"
-                }`}
-                style={{
-                  background: activeGroup === g.id ? `${g.color}10` : "rgba(16,19,26,0.4)",
-                  borderColor: activeGroup === g.id ? `${g.color}40` : "rgba(255,255,255,0.06)",
-                  boxShadow: activeGroup === g.id ? `0 0 20px ${g.color}10` : "none",
-                }}
-              >
-                <div className="flex items-center gap-3">
-                  <div
-                    className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
-                    style={{ background: `${g.color}15`, border: `1px solid ${g.color}30` }}
+        {/* MOBILE */}
+        {isMobile ? (
+          <div className="space-y-4">
+            {SKILL_GROUPS.map((g, i) => {
+              const isActive = activeGroup === g.id;
+
+              return (
+                <motion.div
+                  key={g.id}
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={inView ? { opacity: 1, y: 0 } : {}}
+                  transition={{ delay: 0.15 + i * 0.08 }}
+                  className="space-y-3"
+                >
+                  <button
+                    type="button"
+                    onClick={() => setActiveGroup(isActive ? null : g.id)}
+                    className="w-full text-left p-4 rounded-xl transition-all duration-300 border"
+                    style={{
+                      background: isActive
+                        ? `${g.color}10`
+                        : "rgba(16,19,26,0.4)",
+                      borderColor: isActive
+                        ? `${g.color}40`
+                        : "rgba(255,255,255,0.06)",
+                      boxShadow: isActive ? `0 0 20px ${g.color}10` : "none",
+                    }}
                   >
-                    <span className="font-black text-xs" style={{ color: g.color }}>{g.icon}</span>
-                  </div>
-                  <div>
-                    <p className="font-bold text-white text-sm">{g.label}</p>
-                    <p className="font-mono text-xs text-slate-500">{g.skills.length} technologies</p>
-                  </div>
-                  {activeGroup === g.id && (
-                    <motion.div
-                      layoutId="active-indicator"
-                      className="ml-auto w-2 h-2 rounded-full"
-                      style={{ background: g.color }}
-                    />
-                  )}
-                </div>
-              </motion.button>
-            ))}
+                    <div className="flex items-center gap-3">
+                      <div
+                        className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                        style={{
+                          background: `${g.color}15`,
+                          border: `1px solid ${g.color}30`,
+                        }}
+                      >
+                        <span
+                          className="font-black text-xs"
+                          style={{ color: g.color }}
+                        >
+                          {g.icon}
+                        </span>
+                      </div>
+
+                      <div className="min-w-0">
+                        <p className="font-bold text-white text-sm">{g.label}</p>
+                        <p className="font-mono text-xs text-slate-500">
+                          {g.skills.length} technologies
+                        </p>
+                      </div>
+
+                      <motion.span
+                        className="ml-auto font-mono text-xs text-slate-500"
+                        animate={{ rotate: isActive ? 90 : 0 }}
+                        transition={{ duration: 0.2 }}
+                      >
+                        ▶
+                      </motion.span>
+                    </div>
+                  </button>
+
+                  <AnimatePresence initial={false}>
+                    {isActive && <SkillsDetailPanel group={g} />}
+                  </AnimatePresence>
+                </motion.div>
+              );
+            })}
           </div>
-
-          {/* Skills panel */}
-          <div className="lg:col-span-2">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeGroup}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.4 }}
-                className="glass rounded-2xl p-8"
-                style={{ borderColor: `${group.color}15` }}
-              >
-                <div className="flex items-center gap-3 mb-8">
-                  <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center"
-                    style={{ background: `${group.color}15`, border: `1px solid ${group.color}30` }}
-                  >
-                    <span className="font-black text-sm" style={{ color: group.color }}>{group.icon}</span>
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-black text-white">{group.label}</h3>
-                    <p className="font-mono text-xs text-slate-500">SEQUENCE ANALYSIS</p>
-                  </div>
-                </div>
-
-                <div className="space-y-6">
-                  {group.skills.map((skill, i) => (
-                    <motion.div
-                      key={skill.name}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ delay: i * 0.08 }}
+        ) : (
+          /* DESKTOP */
+          <div className="grid lg:grid-cols-3 gap-8 items-start">
+            <div className="space-y-3">
+              {SKILL_GROUPS.map((g, i) => (
+                <motion.button
+                  key={g.id}
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={inView ? { opacity: 1, x: 0 } : {}}
+                  transition={{ delay: 0.2 + i * 0.1 }}
+                  onClick={() =>
+                    setActiveGroup((prev) => (prev === g.id ? null : g.id))
+                  }
+                  className={`w-full text-left p-4 rounded-xl transition-all duration-300 border ${
+                    activeGroup === g.id ? "scale-[1.02]" : "hover:scale-[1.01]"
+                  }`}
+                  style={{
+                    background:
+                      activeGroup === g.id
+                        ? `${g.color}10`
+                        : "rgba(16,19,26,0.4)",
+                    borderColor:
+                      activeGroup === g.id
+                        ? `${g.color}40`
+                        : "rgba(255,255,255,0.06)",
+                    boxShadow:
+                      activeGroup === g.id
+                        ? `0 0 20px ${g.color}10`
+                        : "none",
+                  }}
+                >
+                  <div className="flex items-center gap-3">
+                    <div
+                      className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                      style={{
+                        background: `${g.color}15`,
+                        border: `1px solid ${g.color}30`,
+                      }}
                     >
-                      <div className="flex items-center justify-between mb-2">
-                        <span className="font-mono text-sm text-slate-300">{skill.name}</span>
-                        <span className="font-mono text-xs text-slate-500">{skill.level}%</span>
-                      </div>
-                      <div className="relative h-2 rounded-full bg-white/[0.06] overflow-hidden">
-                        <motion.div
-                          className="absolute inset-y-0 left-0 rounded-full"
-                          style={{ background: `linear-gradient(90deg, ${group.color}60, ${group.color})` }}
-                          initial={{ width: 0 }}
-                          animate={{ width: `${skill.level}%` }}
-                          transition={{ delay: 0.3 + i * 0.1, duration: 0.8, ease: "easeOut" }}
-                        />
-                      </div>
-                    </motion.div>
-                  ))}
-                </div>
+                      <span
+                        className="font-black text-xs"
+                        style={{ color: g.color }}
+                      >
+                        {g.icon}
+                      </span>
+                    </div>
 
-                {/* Bar chart */}
-                <div className="mt-8 flex items-end gap-2 h-20">
-                  {group.skills.map((skill, i) => (
-                    <motion.div
-                      key={skill.name}
-                      className="flex-1 rounded-t-sm"
-                      style={{ background: `${group.color}15`, border: `1px solid ${group.color}25` }}
-                      initial={{ height: 0 }}
-                      animate={{ height: `${skill.level}%` }}
-                      transition={{ delay: 0.4 + i * 0.1, duration: 0.6, ease: "easeOut" }}
-                    />
-                  ))}
-                </div>
-              </motion.div>
-            </AnimatePresence>
+                    <div>
+                      <p className="font-bold text-white text-sm">{g.label}</p>
+                      <p className="font-mono text-xs text-slate-500">
+                        {g.skills.length} technologies
+                      </p>
+                    </div>
+
+                    {activeGroup === g.id && (
+                      <motion.div
+                        layoutId="active-indicator"
+                        className="ml-auto w-2 h-2 rounded-full"
+                        style={{ background: g.color }}
+                      />
+                    )}
+                  </div>
+                </motion.button>
+              ))}
+            </div>
+
+            <div className="lg:col-span-2">
+              <AnimatePresence mode="wait">
+                {group ? (
+                  <SkillsDetailPanel key={group.id} group={group} />
+                ) : (
+                  <motion.div
+                    key="placeholder"
+                    initial={{ opacity: 0, y: 12 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -12 }}
+                    className="glass rounded-2xl p-8 border border-white/[0.06]"
+                  >
+                    <p className="font-mono text-xs text-slate-600 uppercase tracking-widest mb-3">
+                      SEQUENCE ANALYSIS
+                    </p>
+                    <h3 className="text-xl font-black text-white mb-2">
+                      Select a skill group
+                    </h3>
+                    <p className="text-slate-400 text-sm leading-relaxed">
+                      Choose one of the skill categories on the left to inspect technologies, strength levels, and capability distribution.
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </section>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 
 const links = [
   { id: "identity", label: "Identity" },
@@ -36,13 +36,14 @@ export default function NavBar() {
         scrolled ? "glass-strong py-3" : "py-5 bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 flex items-center justify-between">
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="font-mono text-sm accent-text font-bold tracking-widest uppercase hover:opacity-70 transition-opacity"
         >
           MT<span className="text-slate-500">://</span>
         </button>
+
         <div className="hidden md:flex items-center gap-1">
           {links.map((link) => (
             <button
@@ -58,9 +59,23 @@ export default function NavBar() {
             </button>
           ))}
         </div>
-        <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-slate-300 animate-pulse" />
-          <span className="font-mono text-xs text-slate-500">ONLINE</span>
+
+        <div className="flex flex-col items-center justify-center gap-1 min-w-[56px]">
+          <motion.div
+            className="w-2.5 h-2.5 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.8)]"
+            animate={{
+              scale: [1, 1.25, 1],
+              opacity: [0.8, 1, 0.8],
+            }}
+            transition={{
+              duration: 1.6,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+          <span className="font-mono text-[10px] sm:text-xs text-emerald-400 tracking-widest">
+            ONLINE
+          </span>
         </div>
       </div>
     </motion.nav>
