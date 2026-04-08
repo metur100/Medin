@@ -24,34 +24,23 @@ body {
   color: #e2e8f0;
   font-family: 'Inter', system-ui, sans-serif;
   overflow-x: hidden;
-  cursor: none;
+  /* CSS-only custom cursor — no JS needed */
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Ccircle cx='10' cy='10' r='4' fill='%23e2e8f0'/%3E%3Ccircle cx='10' cy='10' r='9' fill='none' stroke='%23e2e8f0' stroke-width='1.2' opacity='0.4'/%3E%3C/svg%3E") 10 10, auto;
 }
 
+a, button, [data-hover], [role="button"] {
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Ccircle cx='12' cy='12' r='5' fill='%2334d399'/%3E%3Ccircle cx='12' cy='12' r='11' fill='none' stroke='%2334d399' stroke-width='1.4' opacity='0.55'/%3E%3C/svg%3E") 12 12, pointer;
+}
+
+/* ── Scrollbar ── */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-track { background: var(--dark-950); }
 ::-webkit-scrollbar-thumb { background: #334155; border-radius: 2px; }
 
-.cursor-dot {
-  width: 8px; height: 8px;
-  background: #e2e8f0;
-  border-radius: 50%;
-  position: fixed; pointer-events: none; z-index: 9999;
-  transition: transform 0.1s ease;
-  mix-blend-mode: difference;
-}
-
-.cursor-ring {
-  width: 36px; height: 36px;
-  border: 1.5px solid rgba(226,232,240,0.35);
-  border-radius: 50%;
-  position: fixed; pointer-events: none; z-index: 9998;
-  transition: transform 0.15s ease, width 0.2s, height 0.2s, border-color 0.2s;
-  mix-blend-mode: difference;
-}
-.cursor-ring.hovering { width: 56px; height: 56px; border-color: rgba(226,232,240,0.6); }
-
+/* ── Snap ── */
 .snap-section { scroll-snap-align: start; scroll-snap-stop: always; }
 
+/* ── Glass ── */
 .glass {
   background: rgba(16,19,26,0.7);
   backdrop-filter: blur(20px);
@@ -65,15 +54,16 @@ body {
   border: 1px solid rgba(255,255,255,0.1);
 }
 
+/* ── Typography ── */
 .gradient-text {
   background: linear-gradient(135deg, #e2e8f0, #94a3b8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
-
 .accent-text { color: #94a3b8; }
 
+/* ── Background grid ── */
 .bg-grid {
   background-image:
     linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
@@ -81,19 +71,30 @@ body {
   background-size: 60px 60px;
 }
 
+/* ── Scanlines ── */
 .scanlines::after {
   content: '';
   position: absolute; inset: 0;
-  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.06) 2px, rgba(0,0,0,0.06) 4px);
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.06) 2px,
+    rgba(0,0,0,0.06) 4px
+  );
   pointer-events: none; z-index: 1;
 }
 
+/* ── Animations ── */
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 .blink { animation: blink 1s step-end infinite; }
 
-@keyframes float-y { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
-.float-anim { animation: float-y 5s ease-in-out infinite; }
-.float-anim-delay { animation: float-y 5s ease-in-out 1.5s infinite; }
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-12px); }
+}
+.float-anim        { animation: float-y 5s ease-in-out infinite; }
+.float-anim-delay  { animation: float-y 5s ease-in-out 1.5s infinite; }
 .float-anim-delay2 { animation: float-y 5s ease-in-out 3s infinite; }
 
 .gradient-border { position: relative; border-radius: 12px; }
@@ -107,14 +108,14 @@ body {
 
 @keyframes node-pulse {
   0%, 100% { box-shadow: 0 0 0 0 rgba(148,163,184,0.3); }
-  50% { box-shadow: 0 0 0 10px rgba(148,163,184,0); }
+  50%       { box-shadow: 0 0 0 10px rgba(148,163,184,0); }
 }
 .node-pulse { animation: node-pulse 2s infinite; }
 
-@keyframes typing { from { width: 0; } to { width: 100%; } }
+@keyframes typing      { from { width: 0; } to { width: 100%; } }
 @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #94a3b8; } }
 
 @keyframes particle-rise {
-  0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.8; }
+  0%   { transform: translateY(0) translateX(0) scale(1); opacity: 0.8; }
   100% { transform: translateY(-200px) translateX(var(--drift)) scale(0); opacity: 0; }
 }
