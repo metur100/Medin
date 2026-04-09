@@ -112,7 +112,7 @@ export default function EntryGate({ onInitialize, initialized }: Props) {
                 <span className="gradient-text">TURKES</span>
               </h1>
               <p className="text-slate-400 text-lg font-light max-w-md">
-                Full-Stack Engineer · API Architect
+                Full-Stack Software Developer
               </p>
             </motion.div>
 
